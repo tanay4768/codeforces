@@ -1,3 +1,5 @@
+package  how_much_does_daytona_cost;
+
 import java.io.*;
 import java.util.*;
 
@@ -42,29 +44,19 @@ public class Codeforces {
         PrintWriter out = new PrintWriter(System.out);
 
         int t = in.nextInt();
-        while (t> 0) {
+       while (t> 0) {
             t--;
             int n = in.nextInt();
             int k = in.nextInt();
             int[] a = new int[n];
-
-            for (int i = 0; i < n; i++) {
+            Map<Integer, Integer> map = new HashMap<>();
+            for(int i=0; i<n; i++){
                 a[i] = in.nextInt();
+                map.put(a[i], map.getOrDefault(a[i], 0) + 1);
             }
+            if(map.containsKey(k)) out.println("Yes");
+            else out.println("No");
 
-            if(k<2){
-                boolean sorted = true;
-                for (int i = 1; i < a.length; i++) {
-                    if (a[i - 1] > a[i]) {
-                        sorted = false;
-                        break;
-                    }
-                }
-                out.println(sorted ? "yes" : "no");
-            }
-            else{ 
-                out.println("yes");
-            }
         }
         out.flush();
     }

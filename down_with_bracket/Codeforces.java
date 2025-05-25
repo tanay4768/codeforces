@@ -1,3 +1,5 @@
+// package down_with_bracket;
+
 import java.io.*;
 import java.util.*;
 
@@ -13,15 +15,26 @@ public class Codeforces {
 
         String next() {
             while (st == null || !st.hasMoreTokens()) {
-                try { st = new StringTokenizer(br.readLine()); }
-                catch (IOException e) { e.printStackTrace(); }
+                try {
+                    st = new StringTokenizer(br.readLine());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
             return st.nextToken();
         }
 
-        int nextInt() { return Integer.parseInt(next()); }
-        long nextLong() { return Long.parseLong(next()); }
-        double nextDouble() { return Double.parseDouble(next()); }
+        int nextInt() {
+            return Integer.parseInt(next());
+        }
+
+        long nextLong() {
+            return Long.parseLong(next());
+        }
+
+        double nextDouble() {
+            return Double.parseDouble(next());
+        }
 
         // Skips empty lines automatically
         String nextLine() {
@@ -42,12 +55,25 @@ public class Codeforces {
         PrintWriter out = new PrintWriter(System.out);
 
         int t = in.nextInt();
-       while (t> 0) {
+        while (t > 0) {
             t--;
-            int n = in.nextInt();
-           if(n%3>0) out.println("First");
-           else out.println("Second");
+            String s = in.nextLine();
+            char prev = '(';
+            int count=0;
+   
+            for (int i = 0; i < s.length(); i++) {
+                if(i==0){
+                   prev = s.charAt(i);
+                   continue;
+                }
+                if(prev==')' && s.charAt(i)=='('){
+                     count++;
+                }
+                prev = s.charAt(i);
+            }
+            out.println(count>0 ? "Yes":"No" );
         }
+
         out.flush();
     }
 }

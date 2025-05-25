@@ -1,3 +1,4 @@
+package sequence_game;
 import java.io.*;
 import java.util.*;
 
@@ -13,26 +14,15 @@ public class Codeforces {
 
         String next() {
             while (st == null || !st.hasMoreTokens()) {
-                try {
-                    st = new StringTokenizer(br.readLine());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                try { st = new StringTokenizer(br.readLine()); }
+                catch (IOException e) { e.printStackTrace(); }
             }
             return st.nextToken();
         }
 
-        int nextInt() {
-            return Integer.parseInt(next());
-        }
-
-        long nextLong() {
-            return Long.parseLong(next());
-        }
-
-        double nextDouble() {
-            return Double.parseDouble(next());
-        }
+        int nextInt() { return Integer.parseInt(next()); }
+        long nextLong() { return Long.parseLong(next()); }
+        double nextDouble() { return Double.parseDouble(next()); }
 
         // Skips empty lines automatically
         String nextLine() {
@@ -53,32 +43,31 @@ public class Codeforces {
         PrintWriter out = new PrintWriter(System.out);
 
         int t = in.nextInt();
-        while (t > 0) {
+       while (t> 0) {
             t--;
             int n = in.nextInt();
-            String s = in.nextLine();
-            
-            out.println(count(n, s));
 
-        }
-        out.flush();
-    }
+            List<Integer> list = new ArrayList<>();
+            for(int i = 1; i<=n; i++){
+                if(i==1) list.add(in.nextInt());
+                else{
+                    int x = in.nextInt();
+                    if(list.get(list.size() - 1)<=x) list.add(x);
+                    else{
+                        list.add(x);
+                        list.add(x);
+                    }
+                }
 
-    public static int count(int n, String s) {
-        int count = 0;
-        int start = -1;
-        int end = 0;
-        for (int i = 0; i < n; i++) {
-            if (s.charAt(i) == '.') {
-                count++;
-                end = i;
-            } else
-                start = i;
-
-            if (end - start >= 3) {
-                return 2;
             }
+            out.println(list.size());
+            for (int num : list) {
+                out.print(num + " ");
+            }
+           out.println("");
         }
-        return count;
+
+
+        out.flush();
     }
 }

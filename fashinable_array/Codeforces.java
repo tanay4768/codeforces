@@ -1,3 +1,5 @@
+package fashinable_array;
+
 import java.io.*;
 import java.util.*;
 
@@ -45,19 +47,24 @@ public class Codeforces {
        while (t> 0) {
             t--;
             int n = in.nextInt();
-            int x = in.nextInt();
-            int[] a = new int[n];
-            for (int i = 0; i < n; i++) {
+            int a[] = new int[n];
+            int count = 0;
+            for(int i=0; i<n; i++){
                 a[i] = in.nextInt();
             }
-            int max = Integer.MIN_VALUE;
-            for (int i = 1; i < n; i++) {
-                max = Math.max(max, a[i]-a[i-1]);
-            }
-            max = Math.max(max, a[0]);
-            max = Math.max(max, 2*(x-a[n-1]));
-            out.println(max);
+            Arrays.sort(a);
+            int i=0;
+            int j = n-1;
+            count = recurse(a, i, j, count);
+            out.println(count);
+
         }
         out.flush();
+    }
+    public static int recurse(int[] a, int i, int j, int count){
+        int k = count;
+        if(i>=j || (a[i]+a[j])%2==0) return count;
+        k = Math.min(recurse(a, i+1, j, count+1), recurse(a, i, j-1, count+1));
+        return k;
     }
 }
